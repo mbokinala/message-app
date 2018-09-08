@@ -8,6 +8,8 @@ const Message = require('../models/message');
 
 router.post('/messages', (req, res) => {
 	var code = shortid.generate();
+
+	console.log('Creating message ' + req.body.message);
 	const message = new Message({
 		_id: new mongoose.Types.ObjectId(),
 		message: req.body.message,
