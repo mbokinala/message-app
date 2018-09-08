@@ -17,11 +17,7 @@ router.post('/messages', (req, res) => {
 
 	message.save()
 		.then(result => {
-			res.status(201).json({
-				message: req.body.message,
-				password: req.body.message,
-				code: code
-			});
+			res.status(201).json(result);
 		})
 		.catch(err => {
 			console.log(err);
