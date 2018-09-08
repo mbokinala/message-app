@@ -51,8 +51,9 @@
 		</div>
 		<script type="text/javascript">
 			$("#create").click((e) => {
+				console.log($("#textcode").val());
 				var formData = {
-					text: $("#textcode").val(),
+					message: $("#textcode").val(),
 					password: $("#password").val()
 				}
 
