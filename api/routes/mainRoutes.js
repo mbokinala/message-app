@@ -37,8 +37,9 @@ router.post('/getmessage', (req, res) => {
 
 	Message.findOne(query, (err, message) => {
 		if (message){
+			console.log('retrieved message: ');
 			console.log(message.message);
-			res.status(200).send(message.message);
+			res.status(200).send(message);
 		} else {
 			console.log('Not found');
 			res.status(404).send('not found');

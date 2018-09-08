@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Cheon Media Messages</title>
+		<meta name="author" content="Nathan Borror">
+		<!--[if lte IE 6]>
+		<link rel="stylesheet" href="stylesheets/lib/ie6.css" type="text/css" media="screen" charset="utf-8">
+		<![endif]-->
+		<script
+			src="https://code.jquery.com/jquery-3.3.1.min.js"
+			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<div id="page">
+		<div id="header">
+			<h1>Cheon Media Message App</h1>
+		</div>
+		<div id="body" class="wrapper">
+			<div id="introduction">
+				<h3>To create a message: </h3>
+				<ol>
+					<li>Enter your message and a password</li>
+					<li>Click the 'Create message' button</li>
+					<li>Give your friend the generated code and the password you typed</li>
+				</ol>
+
+				<h3>To retrieve a message: </h3>
+				<ol>
+					<li>Enter the code and password given to you</li>
+					<li>Click the 'Retrieve message' button</li>
+					<li>View your message!</li>
+				</ol>
+				<form id="form" class="hform">
+					<fieldset>
+						<legend>Create/Retrieve</legend>
+						<p><label>Message/Code:</label></p>
+							<textarea id="textcode" rows=5 cols=100></textarea>
+						<p><label>Password:</label>
+							<input id="password" type="password" name="address" value="">
+						</p>
+					</fieldset>
+				</form>
+				<button id="create">Create Message</button>
+				<button id="retrieve">Retrieve Message</button>
+				<br>
+				<p id="result">Result: </p>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$("#create").click((e) => {
+				var formData = {
+					text: $("#textcode").val(),
+					password: $("#password").val()
+				}
+
+				console.log(formData);
+
+				$.ajax({
+			 type: 'post',
+			 //url: '/api/encrypt',
+			 url: 'https://mesage-app.herokuapp.com/api/messages',
+			 data: formData,
+			 xhrFields: {
+			     withCredentials: false
+			 },
+			 headers: {
+
+			 },
+			 success: function (data) {
+			     console.log('Success');
+			     console.log(data);
+
+					 $("#result").text("Code: " + data.code);
+			 },
+			 error: function () {
+			     console.log('We are sorry but our servers are having an issue right now');
+			 }
+			})
+			});
+
+			$("#retrieve").click((e) => {
+				var formData = {
+					code: $("#textcode").val(),
+					password: $("#password").val()
+				}
+
+				console.log(formData);
+
+				$.ajax({
+			 type: 'post',
+			 url: 'https://mesage-app.herokuapp.com/api/getmessage',
+			 data: formData,
+			 xhrFields: {
+			     withCredentials: false
+			 },
+			 headers: {
+
+			 },
+			 success: function (data) {
+			     console.log('Success');
+			     console.log(data);
+
+					 $("#result").text("Retrieved Message: " + data);
+			 },
+			 error: function () {
+			     console.log('We are sorry but our servers are having an issue right now');
+			 }
+			})
+			});
+		</script>
+	</body>
+</html>

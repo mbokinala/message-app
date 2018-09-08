@@ -12,6 +12,9 @@ mongoose.connect(`mongodb+srv://main:${process.env.MONGO_ATLAS_PW}@message-app-l
 });
 
 app.use(morgan('dev'));
+
+app.use(express.static('public'));
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
