@@ -12,12 +12,18 @@
 			src="https://code.jquery.com/jquery-3.3.1.min.js"
 			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			crossorigin="anonymous"></script>
+
+			<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+			<link href="index.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<div id="page">
 		<div id="header">
 			<h1>Cheon Media Message App</h1>
 		</div>
+
+		<br>
 		<div id="body" class="wrapper">
 			<div id="introduction">
 				<h3>To create a message: </h3>
@@ -33,15 +39,20 @@
 					<li>Click the 'Retrieve message' button</li>
 					<li>View your message!</li>
 				</ol>
+
+				<br>
+				
 				<form id="form" class="hform">
 					<fieldset>
 						<legend>Create/Retrieve</legend>
 						<p><label>Message/Code:</label></p>
-							<textarea id="textcode" rows=5 cols=100></textarea>
+							<textarea id="textcode" rows=5 cols=50></textarea>
 						<p><label>Password:</label>
 							<input id="password" type="password" name="address" value="">
 						</p>
 					</fieldset>
+
+					<br>
 				</form>
 				<button id="create">Create Message</button>
 				<button id="retrieve">Retrieve Message</button>
