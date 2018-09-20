@@ -1,48 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 body {
-	margin: auto;
-	width: 50%;
-	text-align: center
+	padding: 15px;
+}
+
+#logo {
+	padding: 8px;
+	border-right: 5px solid #448AFF;
+	vertical-align: center;
 }
 
 h1 {
-	font-family: 'Righteous', cursive;
-	margin: auto;
-	width: 50%;
-}
-
-h3 {
-	font-family: 'Righteous', cursive;
-	width: 50%;
-	margin: auto;
-}
-
-ol {
-	width: 75%;
-	margin: auto;
+	font-family: 'Montserrat', sans-serif;
 }
 
 p, li, legend {
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
 
-button {
-	font-family: 'Poppins', sans-serif;
-	font-size: 24px;
-	border-radius: 40px;
-	background: #61ce70;
-	color: white;
-	margin: 0 auto;
-	display: block;
+figcaption {
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
 }
 
-button:hover {
-	background: black
-}
-
-p {
-	text-align: center;
-}
-
-form {
+figure {
 	display: inline-block;
+	padding-left: 5px;
+}
+
+#code-field, #pass-field {
+	width: 75%;
+}
+
+.md-card {
+	width: 50%;
+	padding: 15px;
 }

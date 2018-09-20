@@ -3,11 +3,13 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const config = require("./config.json");
+
 const app = express();
 
 const mainRoutes = require('./api/routes/mainRoutes');
 
-mongoose.connect(`mongodb+srv://main:${process.env.MONGO_ATLAS_PW}@message-app-ldfh3.mongodb.net/test?retryWrites=true`, {
+mongoose.connect(config.mongodb_url, {
 	useNewUrlParser: true
 });
 

@@ -1,65 +1,94 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-	"http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Cheon Media Messages</title>
 		<meta name="author" content="Nathan Borror">
-		<!--[if lte IE 6]>
-		<link rel="stylesheet" href="stylesheets/lib/ie6.css" type="text/css" media="screen" charset="utf-8">
-		<![endif]-->
 		<script
 			src="https://code.jquery.com/jquery-3.3.1.min.js"
 			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			crossorigin="anonymous"></script>
 
-			<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-			<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-			<link href="index.css" rel="stylesheet" type="text/css">
+		<link href="index.css" rel="stylesheet" type="text/css">
+
+		<!-- development version, includes helpful console warnings -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/vue-material.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/theme/default.css">
 	</head>
 	<body>
-		<div id="page">
-		<div id="header">
-			<h1>Cheon Media Message App</h1>
-		</div>
+		<div id="app">
+			<md-toolbar style="width: 50%;">
+				<img id="logo" src="cheonlogo.png" style="width: 7%; height: 7%">
+				<figure>
+					<h1>Cheon Media Message App</h1>
+					<figcaption>Made for perfecheon</figcaption>
+				</figure>
+			</md-toolbar>
 
-		<br>
-		<div id="body" class="wrapper">
-			<div id="introduction">
-				<h3>To create a message: </h3>
-				<ol>
-					<li>Enter your message and a password</li>
-					<li>Click the 'Create message' button</li>
-					<li>Give your friend the generated code and the password you typed</li>
-				</ol>
+			<br>
+			<div id="body" class="wrapper">
+				<div id="introduction">
+					<md-card md-with-hover>
+						<md-card-content>
+							<div class="md-title">To create a message: </div>
+							<ol>
+								<li>Enter your message and a password</li>
+								<li>Click the 'Create message' button</li>
+								<li>Give your friend the generated code and the password you typed</li>
+							</ol>
 
-				<h3>To retrieve a message: </h3>
-				<ol>
-					<li>Enter the code and password given to you</li>
-					<li>Click the 'Retrieve message' button</li>
-					<li>View your message!</li>
-				</ol>
-
-				<br>
-				
-				<form id="form" class="hform">
-					<fieldset>
-						<legend>Create/Retrieve</legend>
-						<p><label>Message/Code:</label></p>
-							<textarea id="textcode" rows=5 cols=50></textarea>
-						<p><label>Password:</label>
-							<input id="password" type="password" name="address" value="">
-						</p>
-					</fieldset>
+							<div class="md-title">To retrieve a message: </div>
+							<ol>
+								<li>Enter the code and password given to you</li>
+								<li>Click the 'Retrieve message' button</li>
+								<li>View your message!</li>
+							</ol>
+						</md-card-content>
+					</md-card>
 
 					<br>
-				</form>
-				<button id="create">Create Message</button>
-				<button id="retrieve">Retrieve Message</button>
-				<br>
-				<p id="result">Result: </p>
+					
+					<md-card md-with-hover>
+						<md-card-header>
+							<div class="md-title">Create/Retrieve</div>
+						</md-card-header>
+						<md-card-content>
+							<form id="form" class="hform">
+								<md-field id="code-field">
+									<label>Message/Code:</label></p>
+									<md-textarea id="textcode"></md-textarea>
+								</md-field>
+								<md-field id="pass-field">
+									<label>Password:</label>
+									<md-input id="password" type="password"></md-input>
+								</md-field>
+							</form>
+						</md-card-content>
+						<md-card-actions>
+							<md-button id="create" class="md-primary">Create Message</md-button>
+							<md-button id="retrieve" class="md-accent">Retrieve Message</md-button>
+						</md-card-actions>
+					</md-card>
+					<br>
+
+					<md-card md-with-hover>
+						<p id="result">Result will appear here</p>
+					</md-card>
+				</div>
 			</div>
 		</div>
+
+    	<script src="https://unpkg.com/vue-material@beta"></script>
+		<script>
+			Vue.use(VueMaterial.default)
+
+			new Vue({
+				el: "#app"
+			})
+		</script>
+
+
 		<script type="text/javascript">
 			$("#create").click((e) => {
 				console.log($("#textcode").val());
@@ -71,26 +100,26 @@
 				console.log(formData);
 
 				$.ajax({
-			 type: 'post',
-			 //url: '/api/encrypt',
-			 url: 'https://mesage-app.herokuapp.com/api/messages',
-			 data: formData,
-			 xhrFields: {
-			     withCredentials: false
-			 },
-			 headers: {
+					type: 'post',
+					//url: '/api/encrypt',
+					url: 'https://mesage-app.herokuapp.com/api/messages',
+					data: formData,
+					xhrFields: {
+						withCredentials: false
+					},
+					headers: {
 
-			 },
-			 success: function (data) {
-			     console.log('Success');
-			     console.log(data);
+					},
+					success: function (data) {
+						console.log('Success');
+						console.log(data);
 
-					 $("#result").text("Code: " + data.code);
-			 },
-			 error: function () {
-			     console.log('We are sorry but our servers are having an issue right now');
-			 }
-			})
+							$("#result").text("Code: " + data.code);
+					},
+					error: function () {
+						console.log('We are sorry but our servers are having an issue right now');
+					}
+				})
 			});
 
 			$("#retrieve").click((e) => {
@@ -102,25 +131,25 @@
 				console.log(formData);
 
 				$.ajax({
-			 type: 'post',
-			 url: 'https://mesage-app.herokuapp.com/api/getmessage',
-			 data: formData,
-			 xhrFields: {
-			     withCredentials: false
-			 },
-			 headers: {
+					type: 'post',
+					url: 'https://mesage-app.herokuapp.com/api/getmessage',
+					data: formData,
+					xhrFields: {
+						withCredentials: false
+					},
+					headers: {
 
-			 },
-			 success: function (data) {
-			     console.log('Success');
-			     console.log(data);
+					},
+					success: function (data) {
+						console.log('Success');
+						console.log(data);
 
-					 $("#result").text("Retrieved Message: " + data.message);
-			 },
-			 error: function () {
-			     console.log('We are sorry but our servers are having an issue right now');
-			 }
-			})
+							$("#result").text("Retrieved Message: " + data.message);
+					},
+					error: function () {
+						console.log('We are sorry but our servers are having an issue right now');
+					}
+				})
 			});
 		</script>
 	</body>
